@@ -1,9 +1,10 @@
 const express = require('express');
+const multerService = require('../utils/libs/multer');
 const mediaController = require('../controllers/mediaController');
 
 const Router = express.Router();
 
-Router.get('/metadata', mediaController.getMetadata);
-Router.put('/metadata', mediaController.setMetadata);
+Router.get('/metadata', multerService.upload.single('file'), mediaController.getMetadata);
+Router.put('/metadata', multerService.upload.single('file'), mediaController.setMetadata);
 
 module.exports = Router;
